@@ -38,10 +38,13 @@ def parse():
         # TODO: if lines[i] = 'last weeks MCs': break
         if lines[i][0:2] == '1.':
             foundMCs = True
+        # gotten past Mack introduction, looking at MCs
         if foundMCs:
             if is_MC_start(lines[i]):
-                newMC = lines[i]
+                # found new MC
+                newMC = ''
                 j = i
+                # add all lines to MC
                 while j + 1< len(lines) and not is_MC_start(lines[j + 1]):
                     newMC += lines[j]
                     j += 1
