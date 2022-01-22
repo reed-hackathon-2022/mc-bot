@@ -1,5 +1,11 @@
 import main
 
+#
+# Helper functions:
+# is_int(): Check if the string can be converted to int
+# is_MC_start(): Check if the string is the start of MCs file
+#
+
 def is_int(element: any):
     try:
         int(element)
@@ -15,7 +21,12 @@ def is_MC_start(string):
     if string[i: i + 2] == '. ' and i != 0:    return True
     else:                           return False
 
-
+#
+# parse(): Main parsing function. Scans through each line of MC.txt file to
+# find first MC. Then for each new MC: creates string of individual MC,
+# checks that MC does not contain sensitive information (phone numbers, emails, etc.),
+# if it does not new MC is added to MC array.
+#
 def parse():
     mcs = []
     f = open('MCs.txt', 'r')
@@ -24,11 +35,9 @@ def parse():
 
     i = 0
     while i < len(lines):
-        print(i)
+        # TODO: if lines[i] = 'last weeks MCs': break
         if lines[i][0:2] == '1.':
-            print('foundMCs')
             foundMCs = True
-        #else: i += 1
         if foundMCs:
             if is_MC_start(lines[i]):
                 newMC = lines[i]
