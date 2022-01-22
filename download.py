@@ -14,11 +14,14 @@ def get_drive_service():
 def fetch_document():
     drive_service = get_drive_service()
     file_id = ""  #  TODO
-    request = drive_service.files().get_media(fileId=file_id)
-    fh = io.BytesIO()
+    request = drive_service.files().export_media(
+        fileId=file_id, mimeType='text/plain'
+    )
+    fh = io.StringIO()
     downloader = MediaIoBaseDownload(fh, request)
     done = False
     while not done:
         status, done = downloader.next_chunk()
-        print(f"Download {status :%}%")
+        print(f"Download status: {status :%}%")
     drive_service.close()
+    return fh.getvalue()
