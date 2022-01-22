@@ -1,6 +1,6 @@
 import main
 
-def is_int(element: any) -> bool:
+def is_int(element: any):
     try:
         int(element)
         return True
@@ -8,7 +8,7 @@ def is_int(element: any) -> bool:
         return False
 
 
-def is_MC_start(string) -> bool:
+def is_MC_start(string):
     i = 0
     while is_int(string[i]):
         i += 1
@@ -16,13 +16,12 @@ def is_MC_start(string) -> bool:
     else:                           return False
 
 
-
 def parse():
     mcs = []
     f = open('MCs.txt', 'r')
     foundMCs = False
-    currentMC = ''
     lines = f.readlines()
+
     i = 0
     while i < len(lines):
         if lines[i][0:2] == '1.':
@@ -36,9 +35,8 @@ def parse():
                     j += 1
                 # TODO: check for phone # ect
                 newMCObject = main.MissedConnection(contents=newMC)
+                mcs.append(newMCObject)
+            i = j + 1
 
-
-
-
-
+    return mcs
 
