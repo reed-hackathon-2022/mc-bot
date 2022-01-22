@@ -24,19 +24,26 @@ def parse():
 
     i = 0
     while i < len(lines):
+        print(i)
         if lines[i][0:2] == '1.':
+            print('foundMCs')
             foundMCs = True
+        #else: i += 1
         if foundMCs:
             if is_MC_start(lines[i]):
                 newMC = lines[i]
                 j = i
-                while not is_MC_start(lines[j + 1]):
-                    newMC.append(lines[j])
+                while j + 1< len(lines) and not is_MC_start(lines[j + 1]):
+                    newMC += lines[j]
                     j += 1
                 # TODO: check for phone # ect
                 newMCObject = main.MissedConnection(contents=newMC)
                 mcs.append(newMCObject)
             i = j + 1
-
+            continue
+        else: i += 1
+    print(mcs)
     return mcs
 
+if __name__ == '__main__':
+    parse()
