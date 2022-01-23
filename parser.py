@@ -16,7 +16,10 @@ def is_int(element: any):
 
 
 def is_MC_start(string):
+    if string.isspace():    return False
     i = 0
+    while string[i].isspace():
+        i += 1
     while is_int(string[i]):
         i += 1
     if string[i: i + 2] == '. ' and i != 0:    return True
@@ -65,14 +68,17 @@ def parse():
                     newMC += lines[j]
                     j += 1
                 # filter out blank MCs (happens if MC is just an image) and MCs with sensitive information
+                print(newMC[:5])
                 # if not is_empty(newMC) and not sensitiveInfoChecker(newMC):
-                if not is_empty(newMC):
-                    newMCObject = main.MissedConnection(contents=newMC)
-                    mcs.append(newMCObject)
+                #if not is_empty(newMC):
+                #    print(newMC[:5])
+                newMCObject = main.MissedConnection(contents=newMC)
+                mcs.append(newMCObject)
             i = j + 1
             continue
         else: i += 1
     print(mcs)
+    print(len(mcs))
     return mcs
 
 if __name__ == '__main__':
