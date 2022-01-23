@@ -25,6 +25,10 @@ def is_MC_start(string):
     if string[i: i + 2] == '. ' and i != 0:    return True
     else:                                      return False
 
+def too_long(MC):
+    if len(MC) > 280:   return True
+    else:               return False
+
 #
 # Helper function that takes a MC as a string and returns True if MC is empty
 # (this happens if the MC only contained an image).
@@ -68,7 +72,7 @@ def parse():
                     newMC += lines[j]
                     j += 1
                 # filter out blank MCs (happens if MC is just an image) and MCs with sensitive information
-                if not is_empty(newMC) and not sensitiveInfoChecker(newMC):
+                if not is_empty(newMC) and not sensitiveInfoChecker(newMC) and not too_long(newMC):
                     newMCObject = MissedConnection(contents=newMC)
                     mcs.append(newMCObject)
             i = j + 1
