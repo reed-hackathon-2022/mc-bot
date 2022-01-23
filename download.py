@@ -13,7 +13,7 @@ def get_drive_service():
 
 def fetch_document():
     drive_service = get_drive_service()
-    file_id = ""  #  TODO
+    file_id = "1s0S4oau1GuJSrzaFhYHfLLq0KRliO4rG2uerNHpXRCk"
     request = drive_service.files().export_media(
         fileId=file_id, mimeType='text/plain'
     )

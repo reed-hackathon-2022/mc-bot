@@ -1,5 +1,6 @@
 from mc import MissedConnection
 from sensInfoCheck import *
+from download import fetch_document
 
 #
 # Helper functions:
@@ -52,7 +53,8 @@ def is_empty(MC):
 #
 def parse():
     mcs = []
-    f = open('MCs.txt', 'r')
+    # f = open('MCs.txt', 'r')
+    f = fetch_document()
     foundMCs = False
     lines = f.readlines()
 
