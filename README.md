@@ -89,7 +89,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 ## Contact
 
 * Aria Killebrew Bruehl  - killebra@reed.edu
-* Serafima Nerush - serafiman@reed.edu
+* Serafima (Sima) Nerush - serafiman@reed.edu
 * Patrick Norton - pnorton@reed.edu
 
 
