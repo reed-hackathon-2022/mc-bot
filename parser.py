@@ -65,7 +65,8 @@ def parse():
                     newMC += lines[j]
                     j += 1
                 # filter out blank MCs (happens if MC is just an image) and MCs with sensitive information
-                if not is_empty(newMC) and not sensitiveInfoChecker(newMC):
+                # if not is_empty(newMC) and not sensitiveInfoChecker(newMC):
+                if not is_empty(newMC):
                     newMCObject = main.MissedConnection(contents=newMC)
                     mcs.append(newMCObject)
             i = j + 1
