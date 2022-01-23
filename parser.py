@@ -1,4 +1,5 @@
 import main
+from sensInfoCheck import *
 
 #
 # Helper functions:
@@ -48,9 +49,10 @@ def parse():
                 while j + 1< len(lines) and not is_MC_start(lines[j + 1]):
                     newMC += lines[j]
                     j += 1
-                # TODO: check for phone # ect
-                newMCObject = main.MissedConnection(contents=newMC)
-                mcs.append(newMCObject)
+                # filter out MCs with sensitive information
+                if not sensitiveInfoChecker(newMC):
+                    newMCObject = main.MissedConnection(contents=newMC)
+                    mcs.append(newMCObject)
             i = j + 1
             continue
         else: i += 1
