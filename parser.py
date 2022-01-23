@@ -85,7 +85,7 @@ def parse():
                         print(newMCArray)
                         print(len(newMCArray))
                         print()
-                        newMCObject = MissedConnection(contents=[newMC])
+                        newMCObject = MissedConnection(contents=newMC)
                     else:
                         newMCObject = MissedConnection(contents=[newMC])
                     mcs.append(newMCObject)
