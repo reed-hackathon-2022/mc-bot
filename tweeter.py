@@ -17,8 +17,8 @@ def tweet_connections(connections):
         access_token=keys["access"], access_token_secret=keys["access_secret"],
         bearer_token=keys["bearer_token"],
     )
-    if sys.argv:
-        start = int(sys.argv[0])
+    if len(sys.argv) > 1:
+        start = int(sys.argv[1])
     else:
         start = 0
     for connection in connections[start:]:
