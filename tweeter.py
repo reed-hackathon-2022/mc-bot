@@ -1,8 +1,11 @@
 import time
+import json
 
 from tweepy import API, OAuthHandler
 
-from main import keys
+
+with open("tokens.json") as tokens:
+    keys = json.load(tokens)
 
 
 def tweet_connections(connections):

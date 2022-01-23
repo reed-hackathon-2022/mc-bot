@@ -1,4 +1,4 @@
-import main
+from mc import MissedConnection
 from sensInfoCheck import *
 
 #
@@ -69,7 +69,7 @@ def parse():
                     j += 1
                 # filter out blank MCs (happens if MC is just an image) and MCs with sensitive information
                 if not is_empty(newMC) and not sensitiveInfoChecker(newMC):
-                    newMCObject = main.MissedConnection(contents=newMC)
+                    newMCObject = MissedConnection(contents=newMC)
                     mcs.append(newMCObject)
             i = j + 1
             continue
@@ -78,5 +78,5 @@ def parse():
     print(len(mcs))
     return mcs
 
-if __name__ == '__main__':
-    parse()
+#if __name__ == '__main__':
+#    parse()
