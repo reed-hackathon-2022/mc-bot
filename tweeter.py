@@ -18,10 +18,17 @@ def tweet_connections(connections):
     )
     for connection in connections:
         if connection.image is None:
-            if len(connection.contents) < 280:
-                print(f"Tweet length: {len(connection.contents)}")
-                client.create_tweet(text=connection.contents)
-                print("Successful tweet")
-                time.sleep(300)
+            previous_id = None
+            print(connection.contents)
+            for content in connection.contents:
+                print(f"Tweet length: {len(content)}")
+                result = client.create_tweet(
+                    text=content, in_reply_to_tweet_id=previous_id
+                )
+                print(result)
+                print(f"Successful tweet: id = {result[0]['id']}")
+                previous_id = result[0]['id']
+                time.sleep(30)
+            time.sleep(270)
         else:
             raise NotImplementedError("Tweeting images is not implemented yet")
