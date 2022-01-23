@@ -1,7 +1,7 @@
 import time
 import json
 
-from tweepy import Client, OAuthHandler
+from tweepy import API, Client, OAuthHandler
 
 
 with open("tokens.json") as tokens:
@@ -18,7 +18,10 @@ def tweet_connections(connections):
     )
     for connection in connections:
         if connection.image is None:
-            client.create_tweet(text=connection.contents)
-            time.sleep(300)
+            if len(connection.contents) < 280:
+                print(f"Tweet length: {len(connection.contents)}")
+                client.create_tweet(text=connection.contents)
+                print("Successful tweet")
+                time.sleep(300)
         else:
             raise NotImplementedError("Tweeting images is not implemented yet")

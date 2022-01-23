@@ -2,3 +2,4 @@ googletoken.json
 tokens.json
 *.pyc
 .idea
+twitter.log
