@@ -36,7 +36,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/reed-hackathon-2022/mc-bot">
-    <img src="images/logo.jpg" alt="Logo" width="80" height="80">
+    <img src="logo.jpg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">project_title</h3>
