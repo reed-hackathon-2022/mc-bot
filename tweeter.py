@@ -1,5 +1,6 @@
 import time
 import json
+import sys
 
 from tweepy import API, Client, OAuthHandler
 
@@ -16,7 +17,11 @@ def tweet_connections(connections):
         access_token=keys["access"], access_token_secret=keys["access_secret"],
         bearer_token=keys["bearer_token"],
     )
-    for connection in connections:
+    if len(sys.argv) > 1:
+        start = int(sys.argv[1])
+    else:
+        start = 0
+    for connection in connections[start:]:
         if connection.image is None:
             previous_id = None
             print(connection.contents)
