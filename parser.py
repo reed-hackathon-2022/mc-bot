@@ -73,21 +73,35 @@ def parse():
                     j += 1
                 # filter out blank MCs (happens if MC is just an image) and MCs with sensitive information
                 if not is_empty(newMC) and not sensitiveInfoChecker(newMC):
-                    if too_long(newMC):
-                        newMCArray = []
-                        newMC = newMC.lstrip()
-                        while len(newMC) > 280:
-                            lastSpace = newMC.rfind(' ', 0, 280)
-                            chunk = newMC[:lastSpace]
-                            newMCArray.append(chunk)
-                            newMC = newMC[lastSpace + 1:]
-                        newMCArray.append(newMC)
-                        print(newMCArray)
-                        print(len(newMCArray))
+                    newMCArray = []
+                    newMC = newMC.lstrip()
+                    lines = newMC.split('\n')
+                    i = 0
+                    while i < len(lines):
+                        chunk = ''
+                        while len(chunk) < 280 and i < len(lines):
+                            if len(chunk) + len(lines[i]) <= 280:
+                                chunk += lines[i]
+                                i += 1
+                            else:
+                                break
+                        newMCArray.append(chunk)
+                    # while len(newMC) > 280:
+                    #     chunk = ''
+                    #     for line in newMC.split('\n'):
+                    #         if len(chunk) + len(line) <= 280:    chunk += line
+                    #         else:                                break
+                    #     # lastSpace = newMC.rfind(' ', 0, 280)
+                    #     # chunk = newMC[:lastSpace]
+
+                    #     newMCArray.append(chunk)
+                    #     newMC = newMC[len(chunk) + 1:]
+                    #newMCArray.append(newMC)
+                    for line in newMCArray:
+                        print(line)
                         print()
-                        newMCObject = MissedConnection(contents=newMC)
-                    else:
-                        newMCObject = MissedConnection(contents=[newMC])
+                    print()
+                    newMCObject = MissedConnection(contents = newMCArray)
                     mcs.append(newMCObject)
 
             i = j + 1
