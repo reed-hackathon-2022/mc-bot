@@ -59,7 +59,7 @@ This project was built during Reed College Hackathon 2022. The bot fetches most 
 ## Usage
 
 
-Go to the bot's Twitter page, follow it and receive missed connections in your Twitter feed!
+Go to the bot's Twitter page, request follow access. Send your first and last name and twitter handle to any of the contributors. After your identity has been confirmed through the Reed directory your request will be approved and you will receive missed connections in your Twitter feed!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
