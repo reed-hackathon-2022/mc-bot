@@ -75,13 +75,16 @@ def parse():
                 if not is_empty(newMC) and not sensitiveInfoChecker(newMC):
                     if too_long(newMC):
                         newMCArray = []
+                        newMC = newMC.lstrip()
                         while len(newMC) > 280:
                             lastSpace = newMC.rfind(' ', 0, 280)
                             chunk = newMC[:lastSpace]
                             newMCArray.append(chunk)
                             newMC = newMC[lastSpace + 1:]
                         newMCArray.append(newMC)
-                        #print(newMCArray)
+                        print(newMCArray)
+                        print(len(newMCArray))
+                        print()
                         newMCObject = MissedConnection(contents=[newMC])
                     else:
                         newMCObject = MissedConnection(contents=[newMC])
@@ -90,9 +93,9 @@ def parse():
             i = j + 1
             continue
         else: i += 1
-    print(mcs)
-    print(len(mcs))
+    #print(mcs)
+    #print(len(mcs))
     return mcs
 
-# if __name__ == '__main__':
-#    parse()
+if __name__ == '__main__':
+   parse()
