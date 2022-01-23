@@ -3,11 +3,14 @@ import io
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
+from google.oauth2 import service_account
 
+SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
 
 def get_drive_service():
     creds = Credentials.from_authorized_user_file('googletoken.json')
-    assert creds.valid
+    if not creds or not creds.valid:
+        creds = service_account.Credentials.from_service_account_file
     return build('drive', 'v3', credentials=creds)
 
 

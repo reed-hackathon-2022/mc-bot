@@ -1,5 +1,6 @@
 googletoken.json
 tokens.json
+serviceaccountcreds.json
 *.pyc
 .idea
 twitter.log
