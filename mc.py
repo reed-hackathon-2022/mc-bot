@@ -4,4 +4,4 @@ class MissedConnection:
         self.image = image
 
     def __repr__(self):
-        return self.contents
+        return ' '.join(self.contents)
