@@ -1,6 +1,7 @@
 import json
 
-#keys = json.load("tokens.json")
+with open("tokens.json") as tokens:
+    keys = json.load(tokens)
 
 
 class MissedConnection:
