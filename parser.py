@@ -72,9 +72,20 @@ def parse():
                     newMC += lines[j]
                     j += 1
                 # filter out blank MCs (happens if MC is just an image) and MCs with sensitive information
-                if not is_empty(newMC) and not sensitiveInfoChecker(newMC) and not too_long(newMC):
-                    newMCObject = MissedConnection(contents=newMC)
+                if not is_empty(newMC) and not sensitiveInfoChecker(newMC):
+                    if too_long(newMC):
+                        newMCArray = []
+                        while len(newMC) > 280:
+                            lastSpace = newMC.rfind(' ', 0, 280)
+                            chunk = newMC[:lastSpace]
+                            newMCArray.append(chunk)
+                            newMC = newMC[lastSpace + 1:]
+                        newMCArray.appned(newMC)
+                        newMCObject = MissedConnection(contents=[newMC])
+                    else:
+                        newMCObject = MissedConnection(contents=[newMC])
                     mcs.append(newMCObject)
+
             i = j + 1
             continue
         else: i += 1
