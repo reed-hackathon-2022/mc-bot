@@ -80,7 +80,8 @@ def parse():
                             chunk = newMC[:lastSpace]
                             newMCArray.append(chunk)
                             newMC = newMC[lastSpace + 1:]
-                        newMCArray.appned(newMC)
+                        newMCArray.append(newMC)
+                        #print(newMCArray)
                         newMCObject = MissedConnection(contents=[newMC])
                     else:
                         newMCObject = MissedConnection(contents=[newMC])
@@ -93,5 +94,5 @@ def parse():
     print(len(mcs))
     return mcs
 
-#if __name__ == '__main__':
+# if __name__ == '__main__':
 #    parse()
