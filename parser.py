@@ -84,7 +84,7 @@ def parse():
                         newMCArray.append(chunk)
                         newMC = newMC[lastSpace:]
                     newMCArray.append(newMC)
-                    if len(newMCArray) <= 25:   newMCObject = MissedConnection(contents = newMCArray) # twitter has a max thread length of 25
+                    newMCObject = MissedConnection(contents = newMCArray)
                     mcs.append(newMCObject)
             i = j + 1
             continue
