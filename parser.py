@@ -17,14 +17,15 @@ def is_int(element: any):
 
 
 def is_MC_start(string):
+    # account for leading whitespace in string
     if string.isspace():    return False
     i = 0
-    while string[i].isspace():
-        i += 1
-    while is_int(string[i]):
-        i += 1
-    if string[i: i + 2] == '. ' and i != 0:    return True
-    else:                                      return False
+    while string[i].isspace():  i += 1
+    while is_int(string[i]):    i += 1
+    # must have found integer and have next characters be '.'
+    if string[i] == '.' and i != 0:
+        return True
+    else:                                     return False
 
 def too_long(MC):
     if len(MC) > 280:   return True
@@ -38,11 +39,11 @@ def is_empty(MC):
     i = 0
     while is_int(MC[i]):
         i += 1
-    if MC[i + 1] == '.':
+    if MC[i] == '.':
         i += 1
     MC = MC[i + 1:]
-    if MC.isspace():    return True
-    else:               return False
+    if MC.isspace() or len(MC) == 0:    return True
+    else:                               return False
 
 
 #
@@ -53,7 +54,7 @@ def is_empty(MC):
 #
 def parse():
     mcs = []
-    # f = open('MCs.txt', 'r')
+    #f = open('MCs_1.26.txt', 'r')
     f = fetch_document()
     foundMCs = False
     lines = f.readlines()
@@ -67,50 +68,29 @@ def parse():
         if foundMCs:
             # found new MC
             if is_MC_start(lines[i]):
-                newMC = ''
+                newMC = lines[i] # add the first line to MC
                 j = i
                 # add all lines to MC
-                while j + 1< len(lines) and not is_MC_start(lines[j + 1]):
-                    newMC += lines[j]
+                while j + 1 < len(lines) and not is_MC_start(lines[j + 1]):
+                    if j != i:  newMC += lines[j] # prevent duplicate first lines
                     j += 1
                 # filter out blank MCs (happens if MC is just an image) and MCs with sensitive information
                 if not is_empty(newMC) and not sensitiveInfoChecker(newMC):
                     newMCArray = []
                     newMC = newMC.lstrip()
-                    # lines = newMC.split('\n')
-                    # i = 0
-                    # while i < len(lines):
-                    #     chunk = ''
-                    #     while len(chunk) < 280 and i < len(lines):
-                    #         if len(chunk) + len(lines[i]) <= 280:
-                    #             chunk += lines[i]
-                    #             i += 1
-                    #         else:
-                    #             break
-                    #     newMCArray.append(chunk)
                     while len(newMC) > 280:
                         lastSpace = newMC.rfind(' ', 0, 280)
                         chunk = newMC[:lastSpace]
                         newMCArray.append(chunk)
                         newMC = newMC[lastSpace:]
                     newMCArray.append(newMC)
-
-                        # for line in newMC.split('\n'):
-                        #     if len(chunk) + len(line) <= 280:    chunk += line
-                        #     else:                                break
-                    for line in newMCArray:
-                        print(line)
-                        print()
-                        newMCObject = MissedConnection(contents=newMCArray)
-                    else:
-                        newMCObject = MissedConnection(contents=[newMC])
+                    if len(newMCArray) <= 25:   newMCObject = MissedConnection(contents = newMCArray) # twitter has a max thread length of 25
                     mcs.append(newMCObject)
-
             i = j + 1
             continue
         else: i += 1
-    #print(mcs)
-    #print(len(mcs))
+    print(mcs)
+    print(len(mcs))
     return mcs
 
 if __name__ == '__main__':
